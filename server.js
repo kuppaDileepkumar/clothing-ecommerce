@@ -13,7 +13,14 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
+// CORS FIX
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
+app.options("*", cors());  // <-- THIS IS WHAT WAS MISSING
+
 app.use(express.json());
 app.use(cookieParser());
 
