@@ -1,0 +1,121 @@
+#############################################
+# BASE URL
+#############################################
+@baseUrl = http://localhost:5000
+
+#############################################
+# AUTH
+#############################################
+
+### REGISTER USER
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "name":"test user",
+  "email":"test@gmail.com",
+  "password":"123456"
+}
+
+### LOGIN USER
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email":"test@gmail.com",
+  "password":"123456"
+}
+
+#############################################
+# PRODUCTS
+#############################################
+
+### GET ALL PRODUCTS
+GET {{baseUrl}}/api/products
+
+### GET ONE PRODUCT
+GET {{baseUrl}}/api/products/PRODUCT_ID_HERE
+
+### CREATE PRODUCT
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Hoodie",
+  "price": 1599,
+  "description": "Premium winter hoodie",
+  "image": "https://picsum.photos/200",
+  "category": "Men",
+  "sizes": ["M","L","XL"],
+  "stock": 20
+}
+
+### UPDATE PRODUCT
+PUT {{baseUrl}}/products/692c0ecba673571ff9f78337
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "price": 59999
+}
+
+### DELETE PRODUCT
+DELETE {{baseUrl}}/api/products/692bcd18953a3e0651d9c327
+
+
+
+#############################################
+# CART
+#############################################
+
+### GET CART
+GET {{baseUrl}}/api/cart
+
+### ADD TO CART
+POST {{baseUrl}}/api/cart/add
+Content-Type: application/json
+
+{
+  "productId":"692c0ecba673571ff9f78337",
+  "size":"L",
+  "qty":2
+}
+
+
+### REMOVE CART ITEM
+DELETE {{baseUrl}}/api/cart/remove
+Content-Type: application/json
+
+{
+  "productId":"692c0ecba673571ff9f78337",
+  "size":"L"
+}
+
+
+#############################################
+# ORDERS
+#############################################
+
+### CREATE ORDER
+POST {{baseUrl}}/api/orders
+Content-Type: application/json
+
+{
+  "items":[
+    {
+      "product":"692c0ecba673571ff9f78337",
+      "name":"Hoodie",
+      "qty":2,
+      "price":1599,
+      "size":"L"
+    }
+  ],
+  "totalPrice":3198
+}
+
+### GET MY ORDERS
+GET {{baseUrl}}/api/orders/my-orders
+
+### GET ORDER BY ID
+GET {{baseUrl}}/orders/692c0ecba673571ff9f78337
+
