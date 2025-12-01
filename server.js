@@ -16,8 +16,10 @@ const app = express();
 
 // CORS FIX
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
+  origin: [
+    "http://localhost:3000",
+    "https://clothing-ecommerce-frontend-delta.vercel.app"],
+  credentials: true, 
 }));
 app.options("*", cors());  // <-- THIS IS WHAT WAS MISSING
 
